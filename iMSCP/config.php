@@ -13,10 +13,10 @@ $sessionName = "imscp_monstaftp";
 $dateFormatUsa = 0;
 $lockOutTime = 2;
 $versionCheck = 0;
-$showAdvOption = 1;
+$showAdvOption = 0;
 $showLockSess = 0;
 $showHostInfo = 1;
-$showAddons = 1;
+$showAddons = 0;
 $showDotFiles = 1;
 
 ?>
