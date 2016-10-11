@@ -1,21 +1,21 @@
 {
-	"name":"imscp/monsta-ftp",
-	"description":"iMSCP tools - Monsta FTP Web FTP client",
-	"version":"1.8.x",
-	"authors":[
-	{
-		"name":"Monsta FTP Team",
-		"homepage":"http://www.monstaftp.com/"
-	}
-],
-	"license":"GPL-3.0+",
-	"keywords":[
-		"imscp",
-		"monstaftp",
-		"filemanager",
-		"tools"
-	],
-	"require":{
-		"php": ">=5.3.7"
-	}
+  "name": "imscp/monsta-ftp",
+  "description": "iMSCP tools - Monsta FTP Web FTP client",
+  "version": "2.1.x",
+  "authors": [
+    {
+      "name": "Monsta FTP Team",
+      "homepage": "http://www.monstaftp.com/"
+    }
+  ],
+  "license": "proprietary",
+  "keywords": [
+    "imscp",
+    "monstaftp",
+    "filemanager",
+    "tools"
+  ],
+  "require": {
+    "php": ">=5.3.7"
+  }
 }

@@ -1,0 +1,37 @@
+<div id="history" class="dropdown" ng-controller="HistoryController">
+    <button class="fa fa-history fa-fw" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" title="{{ 'HISTORY'|translate }}">
+        <span class="caret"></span>
+    </button>
+    <ul id="history-ul" class="dropdown-menu .pull-down" aria-labelledby="history-toggle" >
+    	<li class="empty" ng-hide="history.length" translate>HISTORY_EMPTY_MESSAGE</li>
+        <li title="{{ path }}" ng-repeat="path in history" ng-click="historyClick(path)">
+        	<span>{{ path }}</span>
+        </li>
+    </ul>
+    <div id="breadcrumb" ng-controller="BreadcrumbController as bc">
+        <!--a ng-click="bc.changeDirectoryToItem(0)" id="breadcrumb__home_link">
+            <i class="fa fa-home fa-fw"></i>
+        </a-->
+
+        <ol id="breadcrumb-ol" class="breadcrumb">
+            <li ng-click="bc.changeDirectoryToItem(0)" id="breadcrumb__home_link">
+                <a href="#">
+                    <i class="fa fa-home fa-fw"></i>
+    			</a>
+            </li>
+        </ol>
+
+        <!--ol id="breadcrumb-ol" class="breadcrumb" ng-controller="BreadcrumbController as bc">
+            <li ng-click="bc.changeDirectoryToItem(0)">
+                <a href="#">
+                    <i class="fa fa-home fa-fw"></i>
+    			</a>
+            </li>
+            <li ng-repeat="component in bc.pathComponents track by $index">
+                <a ng-click="bc.changeDirectoryToItem($index + 1)" href="#">
+                    {{ component }}
+                </a>
+            </li>
+        </ol-->
+    </div>
+</div>

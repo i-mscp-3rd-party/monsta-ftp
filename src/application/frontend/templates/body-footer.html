@@ -1,0 +1,135 @@
+<div id="footer" class="toolbar" ng-controller="FooterController">
+    <div class="float-left">
+        <input type="file" id="upload-placeholder" style="display: none" multiple>
+        <input type="file" id="upload-folder-placeholder" style="display: none" directory mozDirectory webkitDirectory>
+        <div class="dropup mobile-show float-left">
+            <button class="fa fa-bars fa-fw active" data-toggle="dropdown" aria-haspopup="true"
+                    aria-expanded="false"></button>
+            <ul class="dropdown-menu">
+                <li ng-class="{active: selectedItemsCount > 0, inactive: selectedItemsCount == 0}" data-name="chmod"
+                    ng-click="buttonClick($event)">
+                    <a href="#">
+                        <i class="fa fa-key fa-fw"></i> {{ 'CHMOD_ACTION'|translate }}
+                    </a>
+                </li>
+                <li ng-class="{active: selectedItemsCount > 0, inactive: selectedItemsCount == 0}" data-name="cut"
+                    ng-click="buttonClick($event)">
+                    <a href="#">
+                        <i class="fa fa-cut fa-fw"></i> {{ 'CUT_ACTION'|translate }}
+                    </a>
+                </li>
+                <li ng-class="{active: selectedItemsCount > 0, inactive: selectedItemsCount == 0}" data-name="copy"
+                    ng-click="buttonClick($event)">
+                    <a href="#">
+                        <i class="fa fa-copy fa-fw"></i> {{ 'COPY_ACTION'|translate }}
+                    </a>
+                </li>
+                <li ng-class="{active: hasPasteSource, inactive: !hasPasteSource}" data-name="paste"
+                    ng-click="buttonClick($event)">
+                    <a href="#">
+                        <i class="fa fa-clipboard fa-fw"></i> {{ 'PASTE_ACTION'|translate }}
+                    </a>
+                </li>
+                <li ng-class="{active: selectedItemsCount > 0, inactive: selectedItemsCount == 0}" data-name="delete"
+                    ng-click="buttonClick($event)">
+                    <a href="#">
+                        <i class="fa fa-trash fa-fw"></i> {{ 'DELETE_DEFERRED_ACTION'|translate }}
+                    </a>
+                </li>
+                <li role="separator" class="divider"></li>
+                <li data-name="fetch-file" ng-click="buttonClick($event)">
+                    <a href="#">
+                        <i class="fa fa-cloud-download fa-fw"></i> {{ 'FETCH_FILE_DEFERRED_ACTION'|translate}}
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="dropup float-left">
+            <button class="fa fa-upload fa-fw active" title="{{ 'UPLOAD_DEFERRED_ACTION'|translate }}" data-toggle="dropdown" aria-haspopup="true"
+                    aria-expanded="false"></button>
+            <ul class="dropdown-menu">
+                <li data-name="upload-file" ng-click="buttonClick($event)"
+                    ng-click="buttonClick($event)">
+                    <a href="#">
+                        <i class="fa fa-file-text-o fa-fw"></i> {{ 'UPLOAD_FILE_DEFERRED_ACTION'|translate }}
+                    </a>
+                </li>
+                <li data-name="upload-folder" ng-click="buttonClick($event)">
+                    <a href="#">
+                        <i class="fa fa-folder-o fa-fw"></i> {{ 'UPLOAD_FOLDER_DEFERRED_ACTION'|translate }}
+                    </a>
+                </li>
+
+
+                <li data-name="upload-archive" ng-click="buttonClick($event)" ng-if="EXTRACT_UPLOAD">
+                    <a href="#">
+                        <i class="fa fa-birthday-cake fa-fw"></i> Upload and Extract Zip&hellip;
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="float-left">
+            <button class="fa fa-download fa-fw"
+                    ng-class="{active: selectedItemsCount > 0, inactive: selectedItemsCount == 0}" title="{{ 'DOWNLOAD_ACTION'|translate}}"
+                    data-name="download" ng-click="buttonClick($event)"></button>
+        </div>
+        <div class="mobile-hide float-left">
+            <button class="fa fa-cloud-download fa-fw active" title="{{ 'FETCH_FILE_DEFERRED_ACTION'|translate}}" data-name="fetch-file"
+                    ng-click="buttonClick($event)"></button>                
+        </div>
+        <div class="dropup float-left">
+            <button class="fa fa-plus-circle fa-fw active" title="{{ 'NEW_FILE_FOLDER_DEFERRED_ACTION'|translate }}" data-toggle="dropdown" aria-haspopup="true"
+                    aria-expanded="false"></button>
+            <ul class="dropdown-menu">
+                <li data-name="new-file" ng-click="buttonClick($event)">
+                    <a href="#">
+                        <i class="fa fa-file-o fa-fw"></i> {{ 'NEW_FILE_DEFERRED_ACTION'|translate }}
+                    </a>
+                </li>
+                <li data-name="new-folder" ng-click="buttonClick($event)">
+                    <a href="#">
+                        <i class="fa fa-folder-o fa-fw"></i> {{ 'NEW_FOLDER_DEFERRED_ACTION'|translate }}
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="float-left">
+            <button class="fa fa-pencil fa-fw" ng-class="{active: editorActive, inactive: !editorActive}"
+                    title="{{ 'SHOW_EDITOR_ACTION'|translate }}"
+                    data-name="show-editor" ng-click="buttonClick($event)"></button>
+        </div>
+
+        <div class="mobile-hide float-left">
+            <button class="fa fa-key fa-fw"
+                    ng-class="{active: selectedItemsCount > 0, inactive: selectedItemsCount == 0}" title="{{ 'CHMOD_ACTION'|translate }}"
+                    data-name="chmod" ng-click="buttonClick($event)"></button>
+            <button class="fa fa-cut fa-fw"
+                    ng-class="{active: selectedItemsCount > 0, inactive: selectedItemsCount == 0}" title="{{ 'CUT_ACTION'|translate }}"
+                    data-name="cut" ng-click="buttonClick($event)"></button>
+            <button class="fa fa-copy fa-fw"
+                    ng-class="{active: selectedItemsCount > 0, inactive: selectedItemsCount == 0}" title="{{ 'COPY_ACTION'|translate }}"
+                    data-name="copy" ng-click="buttonClick($event)"></button>
+            <button class="fa fa-clipboard fa-fw" ng-class="{active: hasPasteSource, inactive: !hasPasteSource}"
+                    title="{{ 'PASTE_ACTION'|translate }}" data-name="paste" ng-click="buttonClick($event)"></button>
+            <button class="fa fa-trash fa-fw"
+                    ng-class="{active: selectedItemsCount > 0, inactive: selectedItemsCount == 0}" title="{{ 'DELETE_DEFERRED_ACTION'|translate }}"
+                    data-name="delete" ng-click="buttonClick($event)"></button>
+        </div>
+    </div>
+    <div class="float-right">
+        <div id="session" class="dropup">
+            <button class="fa fa-info-circle fa-fw active" title="{{ 'SESSION_INFORMATION'|translate }}" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false"></button>
+            <ul class="dropdown-menu dropdown-menu-right">
+                <li title="{{ 'CURRENT_HOST'|translate }}" ng-hide="currentHost == null"><i class="fa fa-server fa-fw"></i> {{ currentHost }}</li>
+                <li title="{{ 'CURRENT_USER'|translate }}" ng-hide="currentUsername == null"><i class="fa fa-user fa-fw"></i> {{ currentUsername }}</li>
+                <li title="{{ 'FILE_UPLOAD_LIMIT'|translate }}" ng-hide="maxUploadBytes == -1"><i class="fa fa-upload fa-fw"></i> {{ maxUploadBytes|file_size }}</li>
+                <li title="{{ 'CURRENT_VERSION'|translate }}"><i class="fa fa-info-circle fa-fw"></i> {{ "VERSION"|translate }} {{ currentVersion }}</li>
+            </ul>
+        </div>
+    </div>
+    <div class="version-alerter float-right" ng-show="newVersionAvailable">
+    	<a href="#" data-toggle="modal" data-target="#modal-upgrade"><i class="fa fa-exclamation-triangle fa-fw fa-2x active version-alert" title="{{ NEW_VERSION_AVAILABLE|translate }}"></i></a>
+    </div>
+</div>
