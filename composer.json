@@ -1,6 +1,6 @@
 {
-  "name": "imscp/monsta-ftp",
-  "description": "iMSCP tools - Monsta FTP Web FTP client",
+  "name": "i-mscp-3rd-party/monsta-ftp",
+  "description": "i-MSCP tools - Monsta FTP Web FTP client",
   "version": "2.1.x",
   "authors": [
     {
