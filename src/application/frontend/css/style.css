@@ -479,7 +479,9 @@ textarea:focus {
     border-radius: 0;
     box-shadow: 0 3px 3px #e3e3e3;
     font-size: inherit;
+    max-height: 400px;
     margin: 0;
+    overflow: scroll;
     width: 100%;
 }
 
@@ -500,12 +502,12 @@ textarea:focus {
     background-color: #fafaec;
 }
 
-#history ul li.empty {
+#history ul li.title {
     color: #9b9b7e;
     font-style: italic;
 }
 
-#history ul li.empty:hover {
+#history ul li.title:hover {
     background: none;
     cursor: default;
 }
@@ -1376,6 +1378,23 @@ textarea:focus {
     #modal-properties .property {
         width: calc(100% - 25px);
     }
+}
+
+/* ADDONS */
+
+#modal-addons .tab-content {
+    margin-bottom: 15px;
+    margin-top: 25px;
+}
+
+#modal-addons textarea {
+    font-size: 95%;
+    height: 250px;
+    width: 100%;
+}
+
+#modal-addons .license-type {
+    margin-bottom: 20px;
 }
 
 /* SETTINGS */

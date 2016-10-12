@@ -13,16 +13,8 @@
             if(!file_exists($licensePath))
                 return null;
 
-            $encodedData = $this->extractEncodedDataFromLicense(file_get_contents($licensePath));
-
-            try{
-                $rawLicenseData = $this->keyPairSuite->base64DecodeAndDecrypt($encodedData);
-            } catch (KeyPairException $e) {
-                throw new InvalidLicenseException("Unable to read the license file at '$licensePath'.",
-                    LocalizableExceptionDefinition::$LICENSE_READ_FAILED_ERROR, array('path' => $licensePath));
-            }
-
-            return json_decode($rawLicenseData, true);
+            $licenseContent = file_get_contents($licensePath);
+            return $this->readLicenseString($licensePath, $licenseContent);
         }
 
         public function extractEncodedDataFromLicense($licenseData) {
@@ -40,5 +32,24 @@
             }
 
             return $encodedData;
+        }
+
+        /**
+         * @param $licensePath
+         * @param $licenseContent
+         * @return mixed
+         * @throws InvalidLicenseException
+         */
+        public function readLicenseString($licensePath, $licenseContent) {
+            $encodedData = $this->extractEncodedDataFromLicense($licenseContent);
+
+            try {
+                $rawLicenseData = $this->keyPairSuite->base64DecodeAndDecrypt($encodedData);
+            } catch (KeyPairException $e) {
+                throw new InvalidLicenseException("Unable to read the license file at '$licensePath'.",
+                    LocalizableExceptionDefinition::$LICENSE_READ_FAILED_ERROR, array('path' => $licensePath));
+            }
+
+            return json_decode($rawLicenseData, true);
         }
     }

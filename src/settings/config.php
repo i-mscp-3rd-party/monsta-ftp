@@ -8,7 +8,7 @@
 
     $configPathSettings = dirname(__FILE__) . "/settings.json";
     $configTimeZone = "UTC";
-    $configTempDir = "{TMP_PATH}";
+    $configTempDir = "";
     $configMaxFileSize = "1024M";
     $configMaxExecutionTimeSeconds = 1800;
 

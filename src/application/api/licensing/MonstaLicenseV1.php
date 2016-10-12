@@ -45,13 +45,17 @@
             return $this->version;
         }
 
-        public function jsonSerialize() {
+        public function toArray() {
             return array(
                 'email' => $this->getEmail(),
                 'purchaseDate' => $this->getPurchaseDate(),
                 'expiryDate' => $this->getExpiryDate(),
                 'version' => $this->getVersion(),
             );
+        }
+
+        public function jsonSerialize() {
+            return $this->toArray();
         }
 
         public function legacyJsonSerialize() {

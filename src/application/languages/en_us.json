@@ -94,15 +94,23 @@
   "MASTER_PASSWORD_SET_PLACEHOLDER": "Choose a master password",
 
   "UPGRADE_MESSAGE_PROFILE": "Try the Professional Edition free for 7 days to save all your logins",
-  "UPGRADE_MESSAGE_GENERAL": "Upgrade to the Professional Edition",
-  "UPGRADE_MESSAGE_TRY_ADVANCED_EDITOR": "Try the Advanced Editor",
+  "UPGRADE_MESSAGE_GENERAL": "Try the Professional Edition free for 7 days",
+  "UPGRADE_MESSAGE_TRY_ADVANCED_EDITOR": "Try the Advanced  Editor",
 
   "HISTORY_EMPTY_MESSAGE": "Your history is empty",
-  "PROFESSIONAL_EDITION": "Professional Edition",
-  "FREE_EDITION": "Free Edition",
-  "LICENSE_VALID_UNTIL_MESSAGE": "Your license is valid until {expiry_date}.",
-  "LICENSE_EXPIRED_ON_MESSAGE": "Your license expired on {expiry_date}.",
+  "RECENT_HISTORY_TITLE": "Recent",
+  "ALL_HISTORY_TITLE": "History",
+
+  "PROFESSIONAL_EDITION": "Your current license is the Professional Edition",
+  "STARTER_EDITION": "Your current license is the Starter Edition",
+  "LICENSE_VALID_UNTIL_MESSAGE": "Your license is valid until {expiry_date}",
+  "LICENSE_EXPIRED_ON_MESSAGE": "Your license expired on {expiry_date}",
   "RENEW_NOW_MESSAGE": "Renew now",
+  "SAVE_LICENSE_ACTION": "Save License",
+  "CURRENT_LICENSE_TAB_TITLE": "Current License",
+  "UPDATE_LICENSE_TAB_TITLE": "Update License",
+  "ENTER_LICENSE_TAB_TITLE": "License Key",
+  "LICENSE_PLACEHOLDER": "Paste your license key here...",
 
   "COPY_FAILURE_MESSAGE": "Unfortunately your browser does not support automatic copying, please copy the address from the text box.",
   "LOGIN_LINK_BAD_CONFIGURATION_MESSAGE": "More login fields need values to generate a link (at minimum a host address.)",
@@ -198,5 +206,9 @@
   "IV_GENERATE_ERROR": "Could not generate an iv, got FALSE",
   "SETTINGS_READ_ERROR": "Could not read JSON settings at {path}.",
   "SETTINGS_WRITE_ERROR": "Could not write JSON settings at {path}.",
-  "ARCHIVE_READ_ERROR": "Could not read ZIP file."
+  "ARCHIVE_READ_ERROR": "Could not read ZIP file.",
+  "LICENSE_WRITE_ERROR": "Could not write license file to {path}",
+  "PRO_CONFIG_WRITE_ERROR": "Could not write pro config to {path}",
+  "REPLACEMENT_LICENSE_OLDER_ERROR": "The new license was not saved as its expiry date is earlier than the current license.",
+  "INVALID_POSTED_LICENSE_ERROR": "The license entered was not valid."
 }

@@ -1,6 +1,7 @@
 <?php
 
     require_once(dirname(__FILE__) . '/ProPackageIDGenerator.php');
+    require_once(dirname(__FILE__) . "/ProConfigBuilder.php");
 
     class ProPackageBuilder {
         private $licenseData;
@@ -27,12 +28,8 @@
         }
 
         private function renderProConfig($proPackageID) {
-            $rawContents = file_get_contents($this->proConfigPath);
-
-            $profileLocalPath = $this->generateRelativeProfilePath($proPackageID);
-            $licenseLocalPath = $this->generateRelativeLicensePath($proPackageID);
-
-            return sprintf($rawContents, $profileLocalPath, $licenseLocalPath);
+            $configBuilder = new ProConfigBuilder($proPackageID);
+            return $configBuilder->renderProConfig($this->proConfigPath);
         }
 
         private function addIndexHtmlToZip($archive) {
@@ -44,11 +41,13 @@
         }
 
         private function generateRelativeProfilePath($proPackageID) {
-            return sprintf("profiles-%s.bin", $proPackageID);
+            $configBuilder = new ProConfigBuilder($proPackageID);
+            return $configBuilder->generateRelativeProfilePath();
         }
 
         private function generateRelativeLicensePath($proPackageID) {
-            return sprintf("license-%s.key", $proPackageID);
+            $configBuilder = new ProConfigBuilder($proPackageID);
+            return $configBuilder->generateRelativeLicensePath();
         }
 
         private function addEmptyProfileToZip($archive, $proPackageID) {

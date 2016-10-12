@@ -27,6 +27,9 @@
     function includeMonstaConfig() {
         $configDir = dirname(__FILE__) . "/../../settings/";
 
+        if(!defined("MONSTA_CONFIG_DIR_PATH"))
+            define("MONSTA_CONFIG_DIR_PATH", $configDir);
+
         if (file_exists($configDir . "config_debug.php"))
             require_once($configDir . "config_debug.php");
         else

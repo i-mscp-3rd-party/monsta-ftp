@@ -1,7 +1,7 @@
 {
-  "name": "i-mscp-3rd-party/monsta-ftp",
+  "name": "i-mscp/monsta-ftp",
   "description": "i-MSCP tools - Monsta FTP Web FTP client",
-  "version": "2.1.x",
+  "version": "2.1.4",
   "authors": [
     {
       "name": "Monsta FTP Team",

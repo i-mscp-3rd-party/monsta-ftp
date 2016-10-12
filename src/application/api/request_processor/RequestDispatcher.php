@@ -10,6 +10,7 @@
     require_once(dirname(__FILE__) . '/../stored_authentication/AuthenticationStorage.php');
     require_once(dirname(__FILE__) . '/../licensing/KeyPairSuite.php');
     require_once(dirname(__FILE__) . '/../licensing/LicenseReader.php');
+    require_once(dirname(__FILE__) . '/../licensing/LicenseWriter.php');
     require_once(dirname(__FILE__) . '/../system/SystemVars.php');
     require_once(dirname(__FILE__) . '/../system/ApplicationSettings.php');
     require_once(dirname(__FILE__) . '/../file_fetch/HTTPFetchRequest.php');
@@ -62,7 +63,8 @@
                 'downloadMultipleFiles',
                 'setApplicationSettings',
                 'deleteMultiple',
-                'extractArchive'
+                'extractArchive',
+                'updateLicense'
             )))
                 return $this->$actionName($context);
 
@@ -188,6 +190,12 @@
             return $licenseReader->readLicense(MONSTA_LICENSE_PATH);
         }
 
+        public function updateLicense($context) {
+            $licenseContent = $context['license'];
+            $licenseWriter = new LicenseWriter($licenseContent, PUBKEY_PATH, MONSTA_CONFIG_DIR_PATH . "../license/");
+            $licenseWriter->writeProFiles(dirname(__FILE__) . "/../resources/config_pro_template.php");
+        }
+
         public function getSystemVars() {
             $systemVars = SystemVars::getSystemVarsArray();
 
@@ -262,6 +270,5 @@
                 unset($_SESSION[$fileKey]);
                 @unlink($archivePath);
             }
-
         }
     }

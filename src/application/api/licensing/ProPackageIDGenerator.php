@@ -6,7 +6,6 @@
          */
         private $salt;
 
-
         /**
          * ProPackageIDGenerator constructor.
          * @param $salt string

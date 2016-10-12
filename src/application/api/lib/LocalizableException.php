@@ -34,6 +34,10 @@
         static public $SETTINGS_READ_ERROR = "SETTINGS_READ_ERROR";
         static public $SETTINGS_WRITE_ERROR = "SETTINGS_WRITE_ERROR";
         static public $ARCHIVE_READ_ERROR = "ARCHIVE_READ_ERROR";
+        static public $LICENSE_WRITE_ERROR = "LICENSE_WRITE_ERROR";
+        static public $PRO_CONFIG_WRITE_ERROR = "PRO_CONFIG_WRITE_ERROR";
+        static public $REPLACEMENT_LICENSE_OLDER_ERROR = "REPLACEMENT_LICENSE_OLDER_ERROR";
+        static public $INVALID_POSTED_LICENSE_ERROR = "INVALID_POSTED_LICENSE_ERROR";
     }
 
     // i wanted this to be a static member on LocalizableExceptionCodeLookup but then i would have to instantiate it
@@ -73,7 +77,11 @@
         LocalizableExceptionDefinition::$IV_GENERATE_ERROR,
         LocalizableExceptionDefinition::$SETTINGS_READ_ERROR,
         LocalizableExceptionDefinition::$SETTINGS_WRITE_ERROR,
-        LocalizableExceptionDefinition::$ARCHIVE_READ_ERROR
+        LocalizableExceptionDefinition::$ARCHIVE_READ_ERROR,
+        LocalizableExceptionDefinition::$LICENSE_WRITE_ERROR,
+        LocalizableExceptionDefinition::$PRO_CONFIG_WRITE_ERROR,
+        LocalizableExceptionDefinition::$REPLACEMENT_LICENSE_OLDER_ERROR,
+        LocalizableExceptionDefinition::$INVALID_POSTED_LICENSE_ERROR
     );
 
     abstract class LocalizableExceptionCodeLookup {
