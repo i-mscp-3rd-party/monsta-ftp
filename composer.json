@@ -1,21 +1,44 @@
 {
-  "name": "i-mscp/monsta-ftp",
-  "description": "i-MSCP tools - Monsta FTP Web FTP client",
-  "version": "2.1.4",
+  "name": "imscp/monsta-ftp",
+  "type": "imscp-tool",
+  "license": "LGPL-2.1-only",
+  "description": "Provides the MonstaFTP Web-based FTP client for i-MSCP",
+  "keywords": [
+    "iMSCP",
+    "tools",
+    "ftp",
+    "monstaftp"
+  ],
+  "homepage": "https://www.i-mscp.net/",
   "authors": [
     {
-      "name": "Monsta FTP Team",
-      "homepage": "http://www.monstaftp.com/"
+      "name": "Laurent Declercq",
+      "email": "l.declercq@nuxwin.com",
+      "homepage": "https://www.i-mscp.net"
     }
   ],
-  "license": "proprietary",
-  "keywords": [
-    "imscp",
-    "monstaftp",
-    "filemanager",
-    "tools"
-  ],
+  "config": {
+    "sort-packages": true
+  },
+  "extra": {
+    "branch-alias": {
+      "dev-master": "2.9.x-dev"
+    }
+  },
   "require": {
-    "php": ">=5.3.7"
+    "php": "^7.3",
+    "imscp/composer-installers": "^1.0",
+    "phpmyadmin/phpmyadmin": "^4.8"
+  },
+  "require-dev": {
+    "imscp/imscp-coding-standard": "^1.0",
+    "roave/security-advisories": "dev-master"
+  },
+  "scripts": {
+    "check": [
+      "@cs-check"
+    ],
+    "cs-check": "phpcs",
+    "cs-fix": "phpcbf"
   }
 }

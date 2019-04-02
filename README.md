@@ -1,6 +1,3 @@
-# i-MSCP MonstaFTP Package 
+# MonstaFTP for i-MSCP internet Multi Server Control Panel
 
-Repository which provides the i-MSCP MonstaFTP composer package. This package is automatically fetched and installed
-by the i-MSCP installer when needed.
-
-Upstream release: 2.1.x Serie
+This package provide the MonstaFTP Web-based FTP client for i-MSCP.
