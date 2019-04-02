@@ -276,7 +276,7 @@ sub _buildConfigFiles
         };
 
         undef $cfgTpl;
-        $rs = $self->{'eventManager'}->trigger(
+        $rs = $self->{'events'}->trigger(
             'onLoadTemplate', 'monstaftp', 'settings.json', \$cfgTpl, $data
         );
         return $rs if $rs;
