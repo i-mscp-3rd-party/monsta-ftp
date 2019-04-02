@@ -27,8 +27,7 @@
   },
   "require": {
     "php": "^7.3",
-    "imscp/composer-installers": "^1.0",
-    "phpmyadmin/phpmyadmin": "^4.8"
+    "imscp/composer-installers": "^1.0"
   },
   "require-dev": {
     "imscp/imscp-coding-standard": "^1.0",
