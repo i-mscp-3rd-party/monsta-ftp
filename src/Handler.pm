@@ -282,7 +282,7 @@ sub _buildConfigFiles
         return $rs if $rs;
 
         $file = iMSCP::File->new(
-            filename => './vendor/imscp/monsta-ftp/mftp/settings/config.php'
+            filename => './vendor/imscp/monsta-ftp/mftp/settings/settings.json'
         );
         $file->set( $cfgTpl || JSON
             ->new()
