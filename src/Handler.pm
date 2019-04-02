@@ -311,7 +311,7 @@ sub _buildConfigFiles
 sub _buildHttpdConfigFile
 {
     my $rs = iMSCP::File->new(
-        filename => "$CWD/vendor/imscp/monstaftp/src/nginx.conf"
+        filename => "$CWD/vendor/imscp/monsta-ftp/src/nginx.conf"
     )->copyFile( '/etc/nginx/imscp_monstaftp.conf' );
     return $rs if $rs;
 
