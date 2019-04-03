@@ -1,0 +1,58 @@
+Index: mftp/application/api/request_processor/RequestMarshaller.php
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- mftp/application/api/request_processor/RequestMarshaller.php	(revision 151ba6ca7eb5d1793c55f5df8fb0afdd2ba5e918)
++++ mftp/application/api/request_processor/RequestMarshaller.php	(date 1554237380000)
+@@ -35,9 +35,9 @@
+         }
+ 
+         private function applyConnectionRestrictions($connectionType, $configuration) {
+-            $license = readDefaultMonstaLicense();
++            /*$license = readDefaultMonstaLicense();
+             if (is_null($license) || !$license->isLicensed())
+-                return $configuration;
++                return $configuration;*/
+ 
+             $applicationSettings = new ApplicationSettings(APPLICATION_SETTINGS_PATH);
+ 
+@@ -229,4 +229,4 @@
+                 'data' => $encodedContents
+             );
+         }
+-    }
+\ No newline at end of file
++    }
+Index: mftp/application/api/system/ApplicationSettings.php
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- mftp/application/api/system/ApplicationSettings.php	(revision 151ba6ca7eb5d1793c55f5df8fb0afdd2ba5e918)
++++ mftp/application/api/system/ApplicationSettings.php	(date 1554237380000)
+@@ -344,7 +344,7 @@
+         public function getConnectionRestrictions() {
+             $restrictions = $this->getSetKey(self::$KEY_CONNECTION_RESTRICTIONS);
+ 
+-            if (is_array($restrictions)) {
++            /*if (is_array($restrictions)) {
+                 $license = readDefaultMonstaLicense();
+                 if (is_null($license) || !$license->isLicensed()) {
+                     if (array_key_exists("types", $restrictions))
+@@ -354,7 +354,7 @@
+                 }
+ 
+                 $restrictions = $this->blankArray($restrictions, array("authenticationModeName", "initialDirectory"));
+-            }
++            }*/
+ 
+             return $restrictions;
+         }
+@@ -631,4 +631,4 @@
+         public function setSkipMacOsSpecialFiles($skipMacOsSpecialFiles) {
+             $this->setBool(self::$KEY_SKIP_MAC_OS_SPECIAL_FILES, $skipMacOsSpecialFiles);
+         }
+-    }
+\ No newline at end of file
++    }

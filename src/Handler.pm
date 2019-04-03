@@ -32,6 +32,7 @@ use iMSCP::Cwd '$CWD';
 use iMSCP::Debug 'error';
 use iMSCP::Dir;
 use iMSCP::EventManager;
+use iMSCP::Execute 'execute';
 use iMSCP::File;
 use iMSCP::TemplateParser qw/ getBloc replaceBloc process /;
 use JSON;
@@ -76,9 +77,9 @@ sub install
 
     local $CWD = $::imscpConfig{'GUI_ROOT_DIR'};
 
-    my $rs ||= $self->_buildConfigFiles();
+    my $rs = $self->_buildConfigFiles();
     $rs ||= $self->_buildHttpdConfigFile();
-    $rs ||= $self->_installAdditionalLanguageFiles();
+    $rs ||= $self->_applyPatches();
 }
 
 =item postinstall( )
@@ -325,27 +326,37 @@ sub _buildHttpdConfigFile
     $file->save();
 }
 
-=item _installAdditionalLanguageFiles( )
+=item _applyPatches( )
 
- Install additional language files for MonstaFTP 
-
+ Apply patches on MonstaFTP sources
+ 
  Return int 0 on success, other on failure
 
 =cut
 
-sub _installAdditionalLanguageFiles
+sub _applyPatches
 {
-    eval {
-        iMSCP::Dir->new(
-            dirname => './vendor/imscp/monsta-ftp/src/languages'
-        )->rcopy( './vendor/imscp/monsta-ftp/mftp/languages' );
-    };
-    if ( $@ ) {
-        error( $@ );
-        return 1;
+    return 0 if -f './vendor/monsta-ftp/src/patches/.patched';
+
+    local $CWD = './vendor/monsta-ftp';
+
+    for my $patch (
+        iMSCP::Dir->new( dirname => './src/patches' )->getFiles()
+    ) {
+        my $rs = execute(
+            [
+                '/usr/bin/git',
+                'apply', '--verbose', '-p0', "./src/patches/$patch"
+            ],
+            \my $stdout,
+            \my $stderr
+        );
+        debug( $stdout ) if length $stdout;
+        error( $stderr || 'Unknown error' ) if $rs;
+        return $rs if $rs;
     }
 
-    0;
+    iMSCP::File->new( filename => './src/patches/.patched' )->save();
 }
 
 =back
