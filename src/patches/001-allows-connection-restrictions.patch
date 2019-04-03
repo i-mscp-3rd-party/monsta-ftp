@@ -3,21 +3,22 @@ IDEA additional info:
 Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 <+>UTF-8
 ===================================================================
---- mftp/application/api/request_processor/RequestMarshaller.php	(revision 151ba6ca7eb5d1793c55f5df8fb0afdd2ba5e918)
-+++ mftp/application/api/request_processor/RequestMarshaller.php	(date 1554237380000)
-@@ -35,9 +35,9 @@
+--- mftp/application/api/request_processor/RequestMarshaller.php	(revision fb65ea25d109aaf9f8afdf630d506342ba6d262b)
++++ mftp/application/api/request_processor/RequestMarshaller.php	(date 1554255925000)
+@@ -35,12 +35,7 @@
          }
  
          private function applyConnectionRestrictions($connectionType, $configuration) {
 -            $license = readDefaultMonstaLicense();
-+            /*$license = readDefaultMonstaLicense();
-             if (is_null($license) || !$license->isLicensed())
+-            if (is_null($license) || !$license->isLicensed())
 -                return $configuration;
-+                return $configuration;*/
- 
+-
              $applicationSettings = new ApplicationSettings(APPLICATION_SETTINGS_PATH);
+-
+             $connectionRestrictions = $applicationSettings->getUnblankedConnectionRestrictions();
  
-@@ -229,4 +229,4 @@
+             if (is_array($connectionRestrictions)) {
+@@ -229,4 +224,4 @@
                  'data' => $encodedContents
              );
          }
@@ -29,27 +30,24 @@ IDEA additional info:
 Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 <+>UTF-8
 ===================================================================
---- mftp/application/api/system/ApplicationSettings.php	(revision 151ba6ca7eb5d1793c55f5df8fb0afdd2ba5e918)
-+++ mftp/application/api/system/ApplicationSettings.php	(date 1554237380000)
-@@ -344,7 +344,7 @@
-         public function getConnectionRestrictions() {
+--- mftp/application/api/system/ApplicationSettings.php	(revision fb65ea25d109aaf9f8afdf630d506342ba6d262b)
++++ mftp/application/api/system/ApplicationSettings.php	(date 1554255893000)
+@@ -345,14 +345,6 @@
              $restrictions = $this->getSetKey(self::$KEY_CONNECTION_RESTRICTIONS);
  
--            if (is_array($restrictions)) {
-+            /*if (is_array($restrictions)) {
-                 $license = readDefaultMonstaLicense();
-                 if (is_null($license) || !$license->isLicensed()) {
-                     if (array_key_exists("types", $restrictions))
-@@ -354,7 +354,7 @@
-                 }
- 
+             if (is_array($restrictions)) {
+-                $license = readDefaultMonstaLicense();
+-                if (is_null($license) || !$license->isLicensed()) {
+-                    if (array_key_exists("types", $restrictions))
+-                        return array("types" => $restrictions["types"]);
+-
+-                    return $this->getDefaultValue(self::$KEY_CONNECTION_RESTRICTIONS);
+-                }
+-
                  $restrictions = $this->blankArray($restrictions, array("authenticationModeName", "initialDirectory"));
--            }
-+            }*/
+             }
  
-             return $restrictions;
-         }
-@@ -631,4 +631,4 @@
+@@ -631,4 +623,4 @@
          public function setSkipMacOsSpecialFiles($skipMacOsSpecialFiles) {
              $this->setBool(self::$KEY_SKIP_MAC_OS_SPECIAL_FILES, $skipMacOsSpecialFiles);
          }
