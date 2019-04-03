@@ -336,9 +336,9 @@ sub _buildHttpdConfigFile
 
 sub _applyPatches
 {
-    return 0 if -f './vendor/monsta-ftp/src/patches/.patched';
+    return 0 if -f './vendor/imscp/monsta-ftp/src/patches/.patched';
 
-    local $CWD = './vendor/monsta-ftp';
+    local $CWD = './vendor/imscp/monsta-ftp';
 
     for my $patch (
         iMSCP::Dir->new( dirname => './src/patches' )->getFiles()
