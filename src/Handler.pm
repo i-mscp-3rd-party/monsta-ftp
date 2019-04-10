@@ -26,7 +26,6 @@ package Package::WebFtpClients::MonstaFTP::Handler;
 use strict;
 use warnings;
 use File::Spec;
-use File::Temp;
 use iMSCP::Boolean;
 use iMSCP::Cwd '$CWD';
 use iMSCP::Debug 'error';
@@ -77,9 +76,9 @@ sub install
 
     local $CWD = $::imscpConfig{'GUI_ROOT_DIR'};
 
-    my $rs = $self->_buildConfigFiles();
+    my $rs = $self->_applyPatches();
+    $rs ||= $self->_buildConfigFiles();
     $rs ||= $self->_buildHttpdConfigFile();
-    $rs ||= $self->_applyPatches();
 }
 
 =item postinstall( )
@@ -107,7 +106,7 @@ sub postinstall
         "$CWD/public/tools/monstaftp"
     ) ) {
         error( sprintf(
-            "Couldn't create symlink for MonstaFTP Web-based FTP client"
+            "Couldn't create symlink for the MonstaFTP Web-based FTP client"
         ));
         return 1;
     }
@@ -208,7 +207,7 @@ sub _init
 
 =item _buildConfigFiles( )
 
- Build PhpMyadminConfiguration files 
+ Build MonstaFTP configuration files 
 
  Return int 0 on success, other on failure
   
@@ -291,11 +290,11 @@ sub _buildConfigFiles
             ->pretty( TRUE )
             ->encode( $data )
         );
-        $rs = $file->save();
+        $file->save();
     };
     if ( $@ ) {
         error( $@ );
-        return 1;
+        $rs = 1;
     }
 
     $rs;

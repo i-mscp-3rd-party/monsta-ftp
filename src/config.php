@@ -8,6 +8,10 @@
  *
  * Perl code:
  *
+ * Package Listener::MonstaFTP::CustomConfigFile;
+ *
+ * use strict;
+ * use warnings;
  * use iMSCP::EventManager;
  * use iMSCP::File;
  *
@@ -20,9 +24,9 @@
  *
  *   # Load custom MonstaFTP configuration file into the $cfgTplContent
  *   # variable.
- *   return 1 unless defined ${ $cfgTplContent } = iMSCP::File->new(
+ *   return 1 unless defined( ${ $cfgTplContent } = iMSCP::File->new(
  *     filename => 'path/to/your/monstaftp/conf/file'
- *   )->get();
+ *   )->get() );
  *
  *   0;
  * });
