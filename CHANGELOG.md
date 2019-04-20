@@ -2,6 +2,29 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
+## 1.0.2 - TBD
+
+### Added
+
+- Nothing.
+
+### Changed
+
+- Apply patches before build of configuration files.
+
+### Deprecated
+
+- Nothing.
+
+### Removed
+
+- Nothing.
+
+### Fixed
+
+- CS fixes (package handler)
+- Localize $@ variable (package handler)
+
 ## 1.0.1 - 20190410
 
 ### Added

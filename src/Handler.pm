@@ -205,6 +205,42 @@ sub _init
     $self;
 }
 
+=item _applyPatches( )
+
+ Apply patches on MonstaFTP sources
+ 
+ Return int 0 on success, other on failure
+
+=cut
+
+sub _applyPatches
+{
+    return 0 if -f './vendor/imscp/monsta-ftp/src/patches/.patched';
+
+    local $CWD = './vendor/imscp/monsta-ftp';
+
+    for my $patch (
+        iMSCP::Dir->new( dirname => './src/patches' )->getFiles()
+    ) {
+        my $rs = execute(
+            [
+                '/usr/bin/git',
+                'apply',
+                '--verbose',
+                '-p0',
+                "./src/patches/$patch"
+            ],
+            \my $stdout,
+            \my $stderr
+        );
+        debug( $stdout ) if length $stdout;
+        error( $stderr || 'Unknown error' ) if $rs;
+        return $rs if $rs;
+    }
+
+    iMSCP::File->new( filename => './src/patches/.patched' )->save();
+}
+
 =item _buildConfigFiles( )
 
  Build MonstaFTP configuration files 
@@ -217,6 +253,7 @@ sub _buildConfigFiles
 {
     my ( $self ) = @_;
 
+    local $@;
     my $rs = eval {
         # Main configuration file
 
@@ -323,39 +360,6 @@ sub _buildHttpdConfigFile
     ${ $fileC } = process( { GUI_ROOT_DIR => $CWD }, ${ $fileC } );
 
     $file->save();
-}
-
-=item _applyPatches( )
-
- Apply patches on MonstaFTP sources
- 
- Return int 0 on success, other on failure
-
-=cut
-
-sub _applyPatches
-{
-    return 0 if -f './vendor/imscp/monsta-ftp/src/patches/.patched';
-
-    local $CWD = './vendor/imscp/monsta-ftp';
-
-    for my $patch (
-        iMSCP::Dir->new( dirname => './src/patches' )->getFiles()
-    ) {
-        my $rs = execute(
-            [
-                '/usr/bin/git',
-                'apply', '--verbose', '-p0', "./src/patches/$patch"
-            ],
-            \my $stdout,
-            \my $stderr
-        );
-        debug( $stdout ) if length $stdout;
-        error( $stderr || 'Unknown error' ) if $rs;
-        return $rs if $rs;
-    }
-
-    iMSCP::File->new( filename => './src/patches/.patched' )->save();
 }
 
 =back
