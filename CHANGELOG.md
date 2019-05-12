@@ -10,7 +10,7 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Changed
 
-- Apply patches before build of configuration files.
+- Nothing.
 
 ### Deprecated
 
