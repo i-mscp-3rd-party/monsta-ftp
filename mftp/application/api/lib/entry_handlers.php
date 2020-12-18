@@ -27,16 +27,12 @@
     function extractSettingVars($postData, $rawKeys, $intKeys, $boolKeys) {
         $loginVars = array();
         for ($varType = 0; $varType <= 2; ++$varType) {
-            switch ($varType) {
-                case 0:
-                    $sourceKeys = $rawKeys;
-                    break;
-                case 1:
-                    $sourceKeys = $intKeys;
-                    break;
-                case 2:
-                default:
-                    $sourceKeys = $boolKeys;
+            if($varType == 0) {
+                $sourceKeys = $rawKeys;
+            } else if($varType == 1) {
+                $sourceKeys = $intKeys;
+            } else {
+                $sourceKeys = $boolKeys;
             }
 
             if (is_null($sourceKeys))
@@ -50,22 +46,15 @@
 
                     $var = $postData[$postKey];
 
-                    switch ($varType) {
-                        case 0:
-                            break;
-                        case 1:
-                            $var = intval($var);
+                    if ($varType == 1) {
+                        $var = intval($var);
 
-                            if ($var == 0)
-                                continue;
-                            /*  0 is returned for invalid numbers, or "0", and since it's only used for port at the
-                                moment it's invalid if 0 anyway, so skip */
-                            break;
-                        case 2:
-                        default:
-                            $var = convertStringToBoolean($var);
-                            if (is_null($var))
-                                continue;
+                        if ($var == 0)
+                            continue;
+                    } else if($var == 2) {
+                        $var = convertStringToBoolean($var);
+                        if (is_null($var))
+                            continue;
                     }
 
                     $loginVars[$varName] = $var;
@@ -106,17 +95,36 @@
         if (array_key_exists('MFTP_POST_LOGOUT_URL', $postData) || array_key_exists('MFTP_LOGIN_FAILURE_REDIRECT', $postData)) {
             $postedVars["settings"] = array();
 
-            if (array_key_exists('MFTP_POST_LOGOUT_URL', $postData))
-                $postedVars["settings"]['postLogoutUrl'] = $postData['MFTP_POST_LOGOUT_URL'];
+            if (array_key_exists('MFTP_POST_LOGOUT_URL', $postData)) {
+                //$postedVars["settings"]['postLogoutUrl'] = $postData['MFTP_POST_LOGOUT_URL'];
+                $postedVars["settings"]['postLogoutUrl'] = filter_var($postData['MFTP_POST_LOGOUT_URL'], FILTER_SANITIZE_URL);
+                if (!filter_var($postedVars["settings"]['postLogoutUrl'], FILTER_VALIDATE_URL)) {
+                    throw new Exception("Invalid logout url");
+                }
+                $protocol = strtolower(parse_url($postedVars["settings"]['postLogoutUrl'], PHP_URL_SCHEME));
+                if ($protocol != 'http' && $protocol != 'https') {
+                    throw new Exception("Invalid logout url");
+                }
+            }
 
-            if (array_key_exists('MFTP_LOGIN_FAILURE_REDIRECT', $postData))
-                $postedVars["settings"]['loginFailureRedirect'] = $postData['MFTP_LOGIN_FAILURE_REDIRECT'];
+            if (array_key_exists('MFTP_LOGIN_FAILURE_REDIRECT', $postData)) {
+                //$postedVars["settings"]['loginFailureRedirect'] = $postData['MFTP_LOGIN_FAILURE_REDIRECT'];
+                $postedVars["settings"]['loginFailureRedirect'] = filter_var($postData['MFTP_LOGIN_FAILURE_REDIRECT'], FILTER_SANITIZE_URL);
+                if (!filter_var($postedVars["settings"]['loginFailureRedirect'], FILTER_VALIDATE_URL)) {
+                    throw new Exception("Invalid failure redirect url");
+                }
+                $protocol = strtolower(parse_url($postedVars["settings"]['loginFailureRedirect'], PHP_URL_SCHEME));
+                if ($protocol != 'http' && $protocol != 'https') {
+                    throw new Exception("Invalid failure redirect url");
+                }
+            }
         }
 
         if (!array_key_exists('MFTP_CONNECTION_TYPE', $postData))
             return $postedVars;
 
-        $connectionType = $postData["MFTP_CONNECTION_TYPE"];
+        //$connectionType = $postData["MFTP_CONNECTION_TYPE"];
+        $connectionType = filter_var($postData["MFTP_CONNECTION_TYPE"], FILTER_SANITIZE_STRING);
 
         $postedVars["type"] = $connectionType;
 

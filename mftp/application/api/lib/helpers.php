@@ -29,8 +29,20 @@
         $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
         $charactersLength = strlen($characters);
         $randomString = '';
-        for ($i = 0; $i < $length; $i++)
-            $randomString .= $characters[rand(0, $charactersLength - 1)];
+        for ($i = 0; $i < $length; $i++) {
+            try {
+                $randomVal = random_int(0, $charactersLength - 1);
+            } catch (TypeError $e) {
+                $randomVal = rand(0, $charactersLength - 1);
+            } catch (Error $e) {
+                // This is required, if you do not need to do anything just rethrow.
+                throw $e;
+            } catch (Exception $e) {
+                $randomVal = rand(0, $charactersLength - 1);
+            }
+
+            $randomString .= $characters[$randomVal];
+        }
 
         return $randomString;
     }
@@ -82,6 +94,14 @@
         // manual basename splitting because built in function may not work with special characters
         $splitPath = explode("/", $path);
         return $splitPath[count($splitPath) - 1];
+    }
+
+    function monstaReplaceExtension($filename, $new_extension) {
+        $info = pathinfo($filename);
+        return ($info['dirname'] ? $info['dirname'] . DIRECTORY_SEPARATOR : '') 
+            . $info['filename'] 
+            . '.' 
+            . $new_extension;
     }
 
     function getMonstaSharedTransferDirectory() {
@@ -199,9 +219,9 @@
         recursiveUnlink($transferDir);
     }
 
-    function readUpload($uploadPath) {
+    function readUpload($uploadPath, $mode="w+") {
         $inputHandler = fopen('php://input', "r");
-        $fileHandler = fopen($uploadPath, "w+");
+        $fileHandler = fopen($uploadPath, $mode);
 
         while (FALSE !== ($buffer = fgets($inputHandler, 65536)))
             fwrite($fileHandler, $buffer);
