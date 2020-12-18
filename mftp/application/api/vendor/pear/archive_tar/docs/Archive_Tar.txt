@@ -64,7 +64,7 @@ None
 Public Methods :
 ----------------
 
-Method : Archive_Tar($p_tarname, $compress = null)
+ethod : Archive_Tar($p_tarname, $compress = null)
 Description :
   Archive_Tar Class constructor. This flavour of the constructor only
   declare a new Archive_Tar object, identifying it by the name of the
@@ -85,7 +85,7 @@ Sample :
 How it works :
   Initialize the object.
 
-Method : create($p_filelist)
+ethod : create($p_filelist)
 Description :
   This method creates the archive file and add the files / directories
   that are listed in $p_filelist. 
@@ -117,7 +117,7 @@ Sample 2 :
 How it works :
   Just calling the createModify() method with the right parameters.
 
-Method : createModify($p_filelist, $p_add_dir, $p_remove_dir = "")
+ethod : createModify($p_filelist, $p_add_dir, $p_remove_dir = "")
 Description :
   This method creates the archive file and add the files / directories
   that are listed in $p_filelist. 
@@ -181,7 +181,7 @@ How it works :
   add the tar footer (512 bytes block), close the tar file.
 
 
-Method : addModify($p_filelist, $p_add_dir, $p_remove_dir="")
+ethod : addModify($p_filelist, $p_add_dir, $p_remove_dir="")
 Description :
   This method add the files / directories listed in $p_filelist at the
   end of the existing archive. If the archive does not yet exists it
@@ -261,7 +261,7 @@ How it works :
   directory. Each time a path need to be added/removed it is done
   before writing the file header in the archive.
 
-Method : add($p_filelist)
+ethod : add($p_filelist)
 Description :
   This method add the files / directories listed in $p_filelist at the
   end of the existing archive. If the archive does not yet exists it
@@ -293,7 +293,7 @@ Sample 2 :
 How it works :
   Simply call the addModify() method with the right parameters.
 
-Method : addString($p_filename, $p_string, $p_datetime, $p_params)
+ethod : addString($p_filename, $p_string, $p_datetime, $p_params)
 Description :
   This method add a single string as a file at the
   end of the existing archive. If the archive does not yet exists it
@@ -324,7 +324,7 @@ Sample 1 :
               );
 
 
-Method : extract($p_path = "")
+ethod : extract($p_path = "")
 Description :
   This method extract all the content of the archive in the directory
   indicated by $p_path.If $p_path is optional, if not set the archive
@@ -342,7 +342,7 @@ Sample :
 How it works :
   Simply call the extractModify() method with appropriate parameters.
 
-Method : extractModify($p_path, $p_remove_path)
+ethod : extractModify($p_path, $p_remove_path)
 Description :
   This method extract all the content of the archive in the directory
   indicated by $p_path. When relevant the memorized path of the
@@ -389,7 +389,7 @@ How it works :
   only a part of the archive or all the archive. 
   See extractList() method for more details.
 
-Method : extractInString($p_filename)
+ethod : extractInString($p_filename)
 Description :
   This method extract from the archive one file identified by $p_filename.
   The return value is a string with the file content, or NULL on error. 
@@ -407,7 +407,7 @@ Sample :
   $v_string = $v_archive->extractInString('dev/readme.txt');
   echo $v_string;
 
-Method : listContent()
+ethod : listContent()
 Description :
   This method returns an array of arrays that describe each
   file/directory present in the archive. 
@@ -442,7 +442,7 @@ How it works :
   Call the same function as an extract however with a flag to only go
   through the archive without extracting the files. 
 
-Method : extractList($p_filelist, $p_path = "", $p_remove_path = "")
+ethod : extractList($p_filelist, $p_path = "", $p_remove_path = "")
 Description :
   This method extract from the archive only the files indicated in the
   $p_filelist. These files are extracted in the current directory or
